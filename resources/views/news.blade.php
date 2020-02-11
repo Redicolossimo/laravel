@@ -2,27 +2,27 @@
 
 @section('content')
     <div class="jumbotron">
-    <div class="container">
+    <div class="container" style="min-height: 80vh; margin-bottom: -3vh">
         <!-- Example row of columns -->
+        @if(isset($category))
+            <h1>{{ $category }}</h1>
+        @else
+            <h1>News</h1>
+        @endif
         <div class="row">
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div>
+                @foreach($news as $key => $body)
+                    <div class="news-block col-sm-12 col-md-6 col-lg-4 col-xl-3" style="padding-top: 20px">
+                            <a style="text-decoration: #2fa360; text-underline-color:mediumseagreen" href="/news/{{ $key }}">
+                                <div>
+                                    <img src="{{ $body['newsImg'] }}" alt="news_img">
+                                </div>
+                                <div style="padding:20px 0 0 50px; color:mediumseagreen;">
+                                    <p >{{ $body['heading'] }}</p>
+                                </div>
+                            </a>
+                    </div>
+                @endforeach
         </div>
-
-        <hr>
     </div> <!-- /container -->
     </div>
 @endsection
