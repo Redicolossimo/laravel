@@ -46,8 +46,26 @@ class NewsController extends Controller
 
     }
 
-    public function addNews()
+    public function addNews(Request $request)
     {
+//        dump($request->except('_token'));
+        if ($request->isMethod('post')) {
+            $request->flash();
+            return redirect()->route('news.addNews');
+        }
+        $news = $request->except('_token');
+
         return view('news.addNews',['categories' => News::$category]);
     }
+
+//    public function saveNews(Request $request) {
+//        $news = $request->except('_token');
+//        if (!News::insert($news)) {
+//            $request->flash();
+//            return redirect()->route('admin.addNews');
+//        }
+//
+//        return redirect()->route('admin.addNews');
+//
+//    }
 }

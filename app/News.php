@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
+use Illuminate\Http\Resources\Json;
 
 class News extends Model
 {
@@ -67,4 +69,27 @@ class News extends Model
             'name' => 'sport'
         ]
     ];
+    public static function getAll() {
+        $file = Storage::disk('public')->get('DB/news.json');
+        return json_decode($file, true);
+    }
+
+    public static function insert($data) {
+        $newsArr = News::getAll();
+        foreach ($data as $prop) {
+            if ($prop == null) {
+                return false;
+            }
+        }
+        if (!isset($news['isPrivate'])) {
+            $data['isPrivate'] = false;
+        }
+        $data['newsImg'] = 'http://placehold.it/150';
+        $data['id'] = count($newsArr) + 1;
+        $newsArr[] = $data;
+
+        $data = json_encode($newsArr, JSON_UNESCAPED_UNICODE);
+        Storage::disk('public')->put('DB/news.json', $data);
+        return true;
+    }
 }

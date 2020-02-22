@@ -8,25 +8,25 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link  {{request()->routeIs('home')?'active':''}}" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('news.all')}}">News</a>
+                <a class="nav-link  {{request()->routeIs('news.all')?'active':''}}" href="{{route('news.all')}}">News</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('news.categories') }}">Categories</a>
+                <a class="nav-link  {{request()->routeIs('news.categories')?'active':''}}" href="{{ route('news.categories') }}">Categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('login')}}">Login</a>
+                <a class="nav-link  {{request()->routeIs('login')?'active':''}}" href="{{route('login')}}">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.test1') }}">Test1</a>
+                <a class="nav-link  {{request()->routeIs('admin.test1')?'active':''}}" href="{{ route('admin.test1') }}">Test1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.test2') }}">Test2</a>
+                <a class="nav-link  {{request()->routeIs('admin.test2')?'active':''}}" href="{{ route('admin.test2') }}">Test2</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('news.addNews') }}">Add News</a>
+                <a class="nav-link  {{request()->routeIs('news.addNews')?'active':''}}" href="{{ route('news.addNews') }}">Add News</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

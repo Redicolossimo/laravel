@@ -5,17 +5,18 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
-            <form>
+            <form action="{{route('news.addNews')}}" method="post">
+                @csrf
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Heading</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="News Title">
+                    <label for="newsTitle">Heading</label>
+                    <input name="heading" type="text" class="form-control" id="newsTitle" placeholder="News Title" value="{{ old('heading') }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Category select</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <label for="catSelect">Category select</label>
+                    <select name="category" class="form-control" id="catSelect">
                         @forelse($categories as $item)
-                            <option>{{ $item['category'] }}</option>
+                            <option @if ($item['id'] == old('category')) selected @endif value="{{ $item['id']}}">{{ $item['category'] }}</option>
                         @empty
                             <h2 style="padding: 20px; margin-left: 50px">No category</h2>
                         @endforelse
@@ -23,23 +24,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Text of article</label>
-                    <textarea class="form-control" rows="3" id="exampleFormControlTextarea1"></textarea>
+                    <label for="newsText">Text of article</label>
+                    <textarea name="description" class="form-control" rows="3" id="newsText">{{ old('description') }}</textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlFile1">Image for the article to upload</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <label for="newsImage">Image for the article to upload</label>
+                    <input name="newsImg" type="file" class="form-control-file" id="newsImage">
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input @if (old('isPrivate') == 1) checked @endif name="isPrivate" class="form-check-input" type="checkbox" value="1" id="newsPrivate">
+                    <label class="form-check-label" for="newsPrivate">
                         Is it for private sector?
                     </label>
                 </div>
                 <div style="padding-top: 20px">
-                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Send" id="input">
+                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Send" id="addNews">
                 </div>
             </form>
         </div>

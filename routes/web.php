@@ -37,7 +37,7 @@ Route::group(
     Route::get('/one/{id}', 'NewsController@newsOne')->name('one');
     Route::get('/categories', 'NewsController@categories')->name('categories');
     Route::get('/category/{id}', 'NewsController@categoryId')->name('categoryId');
-    Route::get('/addNews', 'NewsController@addNews')->name('addNews');
+    Route::match(['post', 'get'],'/addNews', 'NewsController@addNews')->name('addNews');
 }
 );
 
