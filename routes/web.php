@@ -10,14 +10,34 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', ['uses' => 'HomeController@home']);
-Route::get('/home', ['uses' => 'HomeController@home']);
 
-Route::get('/login', ['uses' =>'UserController@index']);
+Route::get('/login', 'UserController@index')->name('login');
 
-Route::get('/news', ['uses' => 'NewsController@index']);
-Route::get('/news/{id}', ['uses' => 'NewsController@getOne']);
 
-Route::get('/categories', ['uses' => 'NewsController@categories']);
-Route::get('/categories/{id}', ['uses' => 'NewsController@getCategory']);
+
+Route::get('/', 'HomeController@home')->name('home');
+Route::get('/home', 'HomeController@home')->name('home');
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Admin',
+    'as' => 'admin.'
+], function () {
+    Route::get('/admin', 'AdminController@admin')->name('admin');
+    Route::get('/test1', 'AdminController@test1')->name('test1');
+    Route::get('/test2', 'AdminController@test2')->name('test2');
+
+});
+
+Route::group(
+    [
+        'prefix' => 'news',
+        'as' => 'news.'
+    ], function () {
+    Route::get('/all', 'NewsController@news')->name('all');
+    Route::get('/one/{id}', 'NewsController@newsOne')->name('one');
+    Route::get('/categories', 'NewsController@categories')->name('categories');
+    Route::get('/category/{id}', 'NewsController@categoryId')->name('categoryId');
+    Route::get('/addNews', 'NewsController@addNews')->name('addNews');
+}
+);
 
