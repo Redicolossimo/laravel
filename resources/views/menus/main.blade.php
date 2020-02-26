@@ -8,19 +8,19 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link {{request()->routeIs('home')?'active':''}}" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('news.all')}}">News</a>
+                    <a class="nav-link {{request()->routeIs('news.all')?'active':''}}" href="{{route('news.all')}}">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('news.categories')}}">Categories</a>
+                    <a class="nav-link {{request()->routeIs('news.categories')?'active':''}}" href="{{route('news.categories')}}">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('login')}}">Login</a>
+                    <a class="nav-link  {{request()->routeIs('login')?'active':''}}" href="{{route('login')}}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.admin')}}">Admin</a>
+                    <a class="nav-link  {{request()->routeIs('admin.admin')?'active':''}}" href="{{route('admin.admin')}}">Admin</a>
                 </li>
 
                 {{--            <li class="nav-item">--}}
