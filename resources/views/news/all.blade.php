@@ -17,19 +17,19 @@
                 @forelse($news as $item)
                     <div class="news-block col-sm-12 col-md-6 col-lg-4 col-xl-3" style="padding-top: 20px">
                         <a style="text-decoration: #2fa360; text-underline-color:mediumseagreen"
-                           href="{{ route('news.one', $item['id']) }}">
-                            <div>
-                                <img src="{{ $item['newsImg'] }}" alt="news_img">
+                           href="{{ route('news.one', $item->id) }}">
+                            <div style="width: 150px; height: 150px; ">
+                                <img style="width: 100%" src="{{ $item->newsImg == "" ? asset('http://placehold.it/150') : $item->newsImg}}" alt="news_img">
                             </div>
                             <div style="padding:20px 0 0 25px; color:mediumseagreen;">
-                                <p>{{ $item['heading'] }}</p>
+                                <p>{{ $item->heading }}</p>
                             </div>
                         </a>
                     </div>
                 @empty
                     <p>No News</p>
                 @endforelse
-            </div>
-        </div> <!-- /container -->
+                </div>
+            </div> <!-- /container -->
     </div>
 @endsection

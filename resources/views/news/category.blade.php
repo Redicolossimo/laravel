@@ -13,10 +13,10 @@
                     @forelse($categories as $item)
                         <div>
                             <h2><a
-                                    href="{{ route('news.categoryId', $item['name']) }}"
+                                    href="{{ route('news.categoryId', $item->name) }}"
                                     style="color:mediumseagreen;"
                                 >
-                                    {{ $item['category'] }}
+                                    {{ $item->category }}
                                 </a></h2>
                         </div>
                     @empty

@@ -5,7 +5,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
-            <form action="{{route('news.addNews')}}" method="post">
+            <form enctype="multipart/form-data" action="{{route('news.addNews')}}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="newsTitle">Heading</label>
@@ -16,7 +16,7 @@
                     <label for="catSelect">Category select</label>
                     <select name="category" class="form-control" id="catSelect">
                         @forelse($categories as $item)
-                            <option @if ($item['id'] == old('category')) selected @endif value="{{ $item['id']}}">{{ $item['category'] }}</option>
+                            <option @if ($item->id == old('category')) selected @endif value="{{ $item->id}}">{{ $item->category }}</option>
                         @empty
                             <h2 style="padding: 20px; margin-left: 50px">No category</h2>
                         @endforelse

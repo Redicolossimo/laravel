@@ -69,13 +69,21 @@ class News extends Model
             'name' => 'sport'
         ]
     ];
-    public static function getAll() {
-        $file = Storage::disk('public')->get('DB/news.json');
-        return json_decode($file, true);
+
+    public static function getNews()
+    {
+        return json_decode(Storage::disk('local')->get('news.json'), true);
     }
 
-    public static function insert($data) {
-        $newsArr = News::getAll();
+    public static function getCategories()
+    {
+        return json_decode(Storage::disk('local')->get('category.json'), true);
+    }
+
+
+    public static function insert($data)
+    {
+        $newsArr = News::getNews();
         foreach ($data as $prop) {
             if ($prop == null) {
                 return false;

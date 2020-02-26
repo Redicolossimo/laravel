@@ -18,7 +18,7 @@ class AdminController extends Controller
 
     public function test1()
     {
-        return response()->json(News::$news)
+        return response()->json(News::getNews())
             ->header('Content-Disposition', 'attachment; filename = "json.txt"')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
