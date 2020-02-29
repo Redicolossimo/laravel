@@ -31,7 +31,7 @@
                     <br>
                     <div style="padding-left: 70px; padding-top: 40px; padding-bottom: 20px">
 
-                        <a href="{{route('home')}}">Go
+                        <a href="{{route('home')}}" style="color: mediumseagreen">Go
                             back to homepage
                             without log in</a>
 

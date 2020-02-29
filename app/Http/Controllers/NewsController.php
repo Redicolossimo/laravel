@@ -4,43 +4,56 @@ namespace App\Http\Controllers;
 
 use App\News;
 use Illuminate\Http\Request;
+use Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class NewsController extends Controller
 {
     public function news()
     {
-        return view('news.all', ['news' => News::$news]);
+        $news = DB::table('news')->get();
+        return view('news.all', ['news' => $news]);
     }
 
     public function categories()
     {
-        return view('news.category', ['categories' => News::$category]);
+        $categories = DB::table('categories')->get();
+        return view('news.category', ['categories' => $categories]);
     }
 
     public function newsOne($id)
     {
-        if (array_key_exists($id, News::$news))
-            return view('news.one', ['news' => News::$news[$id]]);
-        else
+        $news = DB::table('news')->find($id);
+
+        if (!empty($news)) {
+            return view('news.one', ['news' => $news]);
+        } else
             return redirect(route('news.all'));
 
     }
 
     public function categoryId($id)
     {
-        $news = [];
 
-        foreach (News::$category as $item) {
-            if ($item['name'] == $id) $id = $item['id'];
+        $newsAll = DB::table('news')->get();
+        $categories = DB::table('categories')->get();
+//        $ids = DB::table('categories')->;
+
+        foreach ($categories as $item) {
+            $ids[] = $item->id;
+            if ($item->name == $id) $id = $item->id;
         }
 
-        if (array_key_exists($id, News::$category)) {
-            $name = News::$category[$id]['category'];
-            foreach (News::$news as $item) {
-                if ($item['category_id'] == $id)
+        if ($id) {
+            $name = $categories[$id - 1]->category;
+            foreach ($newsAll as $item) {
+                if ($item->category_id === $id) {
                     $news[] = $item;
+                }
             }
-            return view('news.oneCategory', ['news' => $news, 'category' => $name]);
+
+            return view('news.oneCategory', ['news' => $news, 'category' => $name, 'categories' => $categories]);
         } else
             return redirect(route('news.categories'));
 
@@ -48,24 +61,27 @@ class NewsController extends Controller
 
     public function addNews(Request $request)
     {
-//        dump($request->except('_token'));
+
         if ($request->isMethod('post')) {
-            $request->flash();
-            return redirect()->route('news.addNews');
+            //$request->flash();
+
+            $url = null;
+            if ($request->file('newsImg')) {
+                $path = Storage::putFile('public', $request->file('newsImg'));
+                $url = Storage::url($path);
+            }
+
+            DB::table('news')->insert([
+                'heading' => $request->heading,
+                'description' => $request->description,
+                'newsImg' => $url,
+                'category_id' => $request->category,
+                'isPrivate' => isset($request->isPrivate)
+            ]);
+
+            return redirect()->route('news.all')->with('success', 'Новость успешно добавлена');
         }
-        $news = $request->except('_token');
-
-        return view('news.addNews',['categories' => News::$category]);
+        $categories = DB::table('categories')->get();
+        return view('news.addNews', ['categories' => $categories]);
     }
-
-//    public function saveNews(Request $request) {
-//        $news = $request->except('_token');
-//        if (!News::insert($news)) {
-//            $request->flash();
-//            return redirect()->route('admin.addNews');
-//        }
-//
-//        return redirect()->route('admin.addNews');
-//
-//    }
 }
