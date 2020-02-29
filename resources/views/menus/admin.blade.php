@@ -26,7 +26,7 @@
                 <a class="nav-link  {{request()->routeIs('admin.test2')?'active':''}}" href="{{ route('admin.test2') }}">Test2</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{request()->routeIs('news.addNews')?'active':''}}" href="{{ route('news.addNews') }}">Add News</a>
+                <a class="nav-link  {{request()->routeIs('admin.addNews')?'active':''}}" href="{{ route('admin.addNews') }}">Add News</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

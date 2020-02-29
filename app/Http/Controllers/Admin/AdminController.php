@@ -5,20 +5,15 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\News;
+use Storage, Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
 {
-    public function admin()
-    {
-
-        return view('admin.admin');
-
-    }
 
     public function test1()
     {
-        return response()->json(News::getNews())
+        return response()->json(News::all())
             ->header('Content-Disposition', 'attachment; filename = "json.txt"')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }

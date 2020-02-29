@@ -17,11 +17,8 @@ class CreateNewsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('heading')->comment('Heading of news');
             $table->text('description')->comment('Description, full text of news');
-            $table->string('newsImg')->default(null);
-            $table->bigInteger('category_id')->unsigned();
+            $table->string('newsImg')->nullable(true);
             $table->boolean('isPrivate')->default(false);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

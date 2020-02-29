@@ -20,7 +20,7 @@
                     <a class="nav-link  {{request()->routeIs('login')?'active':''}}" href="{{route('login')}}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  {{request()->routeIs('admin.admin')?'active':''}}" href="{{route('admin.admin')}}">Admin</a>
+                    <a class="nav-link  {{request()->routeIs('admin.news')?'active':''}}" href="{{route('admin.news')}}">Admin</a>
                 </li>
 
                 {{--            <li class="nav-item">--}}
