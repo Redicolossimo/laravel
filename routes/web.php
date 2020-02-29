@@ -41,7 +41,7 @@ Route::group(
     Route::get('/all', 'NewsController@news')->name('all');
     Route::get('/one/{news}', 'NewsController@newsOne')->name('one');
     Route::get('/categories', 'NewsController@categories')->name('categories');
-    Route::get('/category/{id}', 'NewsController@categoryId')->name('categoryId');
+    Route::get('/category/{category}', 'NewsController@categoryId')->name('categoryId');
 }
 );
 

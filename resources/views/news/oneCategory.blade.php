@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ $category }}
+    {{ $category->category }}
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@
                     <h2 style="padding: 20px; margin-left: 50px">No category</h2>
                 @endforelse
             </div>
-            <h1 style="font-size: 4rem">News in category: {{ $category }}</h1>
+            <h1 style="font-size: 4rem">News in category: {{ $category->category }}</h1>
             @forelse($news as $item)
                 <br>
                 <div>
@@ -34,6 +34,10 @@
             @empty
                 <h2 style="padding: 20px; margin-left: 50px">No news</h2>
             @endforelse
+            <div style="display: flex; justify-content: center; margin-top: 50px ">
+                {{ $news->links() }}
+            </div>
         </div>
+
     </div>
 @endsection

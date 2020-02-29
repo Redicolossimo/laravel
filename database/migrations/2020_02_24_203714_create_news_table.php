@@ -19,6 +19,7 @@ class CreateNewsTable extends Migration
             $table->text('description')->comment('Description, full text of news');
             $table->string('newsImg')->nullable(true);
             $table->boolean('isPrivate')->default(false);
+            $table->integer('category_id');
         });
     }
 

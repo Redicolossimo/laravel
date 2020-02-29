@@ -34,16 +34,11 @@ class NewsController extends Controller
 
     public function categoryId(Category $category)
     {
+        $news = News::query()
+            ->where('category_id', $category->id)
+            ->paginate(4);
+        $categories = Category::query()->select(['id', 'category', 'name'])->get();
 
-        $cat = Category::query()->select(['id', 'category'])->where('name', $id)->get();
-        /*
-                $news = News::query()
-                    ->where('category_id', $cat[0]->id)
-                    ->paginate(5);
-        */
-        $news = Category::query()->find($cat[0]->id)->news()->paginate(5);
-
-        return view('news.oneCategory', ['news' => $news, 'category' => $cat[0]->category]);
-
+        return view('news.oneCategory', ['category' => $category, 'news' => $news, 'categories' => $categories]);
     }
 }
