@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Category;
 use App\News;
 use Illuminate\Http\Request;
@@ -18,59 +19,76 @@ class NewsController extends Controller
 
     }
 
-    public function update(Request $request, News $news) {
+    public function update(Request $request, News $news)
+    {
 
         return view('admin.addNews', [
             'news' => $news,
-            'categories' => Category::query()->select(['id','category'])->get()
+            'categories' => Category::all()
         ]);
     }
 
-    public function save(Request $request, News $news) {
+    public function save(Request $request, News $news)
+    {
         if ($request->isMethod('post')) {
             if ($request->file('newsImg')) {
                 $path = Storage::putFile('public', $request->file('newsImg'));
-                $url = Storage::url($path);
-                $news->newsImg = $url;
+                $news->newsImg = Storage::url($path);;
             }
+            $this->validate($request, News::rules(), [], News::attributeNames());
+            $result = $news->fill($request->all())->save();
 
-            $news->fill($request->all());
-            $news->save();
-            return redirect()->route('admin.news')->with('success', 'Новость успешно изменена!');
+            if ($result) {
+                return redirect()
+                    ->route('admin.news')
+                    ->with('success', 'Новость успешно изменена!');
+            } else {
+                return redirect()
+                    ->route('admin.addNews')
+                    ->with('error', 'Ошибка изменения новости!');
+            }
         }
     }
 
-    public function delete(News $news) {
+    public function delete(News $news)
+    {
 
         $news->delete();
-        return redirect()->route('admin.news')->with('success', 'Новость успешно удалена!');
+        return redirect()
+            ->route('admin.news')
+            ->with('success', 'Новость успешно удалена!');
     }
 
     public function add(Request $request, News $news)
     {
-        // dump($news);
         if ($request->isMethod('post')) {
-            //$request->flash();
+            $request->flash();
 
             $url = null;
-            $news = new News();
+            //$news = new News();
 
             if ($request->file('newsImg')) {
-                //$path = Storage::putFile('public', $request->file('image'));
-                //$url = Storage::url($path);
-                $path = $request->file('newsImg')->store('public');
+
+                $path = $request->file('newsImg')
+                    ->store('public');
                 $news->newsImg = Storage::url($path);
             }
-
-            $news->fill($request->all());
-            $news->save();
-
-            return redirect()->route('admin.news')->with('success', 'Новость успешно создана!');
+            $this->validate($request, News::rules(), [], News::attributeNames());
+            $result = $news->fill($request->all())->save();
+            if($result) {
+                return redirect()
+                    ->route('admin.news')
+                    ->with('success', 'Новость успешно создана!');
+            } else {
+                return redirect()
+                    ->route('admin.addNews')
+                    ->with('error', 'При создании новости что то пошло не так!');
+            }
         }
 
         return view('admin.addNews', [
             'news' => $news,
-            'categories' => Category::query()->select(['id','category'])->get()
+            'categories' => Category::all()
         ]);
     }
 

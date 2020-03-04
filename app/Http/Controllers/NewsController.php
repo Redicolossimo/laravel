@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 
 class NewsController extends Controller
 {
-    public function news()
+    public function news(News $news)
     {
         $news = News::query()
             ->where('isPrivate', false)
@@ -22,7 +22,8 @@ class NewsController extends Controller
     public function categories()
     {
         return view('news.category', [
-                'categories' => Category::query()->select(['id', 'category', 'name'])->get()
+//                'categories' => Category::query()->select(['id', 'category', 'name'])->get()
+                'categories' => Category::all()
             ]
         );
     }
@@ -37,7 +38,7 @@ class NewsController extends Controller
         $news = News::query()
             ->where('category_id', $category->id)
             ->paginate(4);
-        $categories = Category::query()->select(['id', 'category', 'name'])->get();
+        $categories = Category::all();
 
         return view('news.oneCategory', ['category' => $category, 'news' => $news, 'categories' => $categories]);
     }

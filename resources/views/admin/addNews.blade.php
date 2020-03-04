@@ -5,18 +5,36 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
-            <form enctype="multipart/form-data" action="@if (!$news->id){{ route('admin.addNews') }} @else {{ route('admin.saveNews', $news) }}@endif" method="post">
+            <form enctype="multipart/form-data"
+                  action="@if (!$news->id){{ route('admin.addNews') }} @else {{ route('admin.saveNews', $news) }}@endif"
+                  method="post">
                 @csrf
                 <div class="form-group">
                     <label for="newsTitle">Heading</label>
-                    <input name="heading" type="text" class="form-control" id="newsTitle" placeholder="News Title" value="{{ $news->heading ?? old('heading') }}">
+                    @if ($errors->has('heading'))
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->get('heading') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+                    <input name="heading" type="text" class="form-control" id="newsTitle" placeholder="News Title"
+                           value="{{ $news->heading ?? old('heading') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="catSelect">Category select</label>
+                    @if ($errors->has('category_id'))
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->get('category_id') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
                     <select name="category_id" class="form-control" id="catSelect">
                         @forelse($categories as $item)
-                            <option @if ($item->id == old('category')) selected @endif value="{{ $item->id}}">{{ $item->category }}</option>
+                            <option @if ($item->id == old('category')) selected
+                                    @endif value="{{ $item->id}}">{{ $item->category }}</option>
                         @empty
                             <h2 style="padding: 20px; margin-left: 50px">No category</h2>
                         @endforelse
@@ -25,16 +43,32 @@
 
                 <div class="form-group">
                     <label for="newsText">Text of article</label>
-                    <textarea name="description" class="form-control" rows="3" id="newsText">{{ $news->description ?? old('description') }}</textarea>
+                    @if ($errors->has('description'))
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->get('description') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+                    <textarea name="description" class="form-control" rows="3"
+                              id="newsText">{{ $news->description ?? old('description') }}</textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="newsImage">Image for the article to upload</label>
+                    @if ($errors->has('newsImg'))
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->get('newsImg') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
                     <input name="newsImg" type="file" class="form-control-file" id="newsImage">
                 </div>
 
                 <div class="form-check">
-                    <input @if ($news->isPrivate == 1 || old('isPrivate') == 1) checked @endif name="isPrivate" class="form-check-input" type="checkbox" value="1" id="newsPrivate">
+                    <input @if ($news->isPrivate == 1 || old('isPrivate') == 1) checked @endif name="isPrivate"
+                           class="form-check-input" type="checkbox" value="1" id="newsPrivate">
                     <label class="form-check-label" for="newsPrivate">
                         Is it for private sector?
                     </label>
