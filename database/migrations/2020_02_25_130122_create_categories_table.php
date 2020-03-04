@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('category', 255);
             $table->string('name', 255);
         });
+        (new CategoriesSeeder())->run();
     }
 
     /**
