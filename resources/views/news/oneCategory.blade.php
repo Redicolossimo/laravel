@@ -11,7 +11,7 @@
                 @forelse($categories as $item)
                     <div>
                         <h2><a
-                                href="{{ route('news.categoryId', $item->name) }}"
+                                href="{{ route('news.categoryId', $item) }}"
                                 style="color:mediumseagreen;"
                             >
                                 {{ $item->category }}
@@ -27,7 +27,7 @@
                 <div>
                     <h2>{{ $item->heading }}</h2>
                     @if (!$item->isPrivate)
-                        <a href="{{ route('news.one', $item->id) }}" style="color:mediumseagreen">Details...</a>
+                        <a href="{{ route('news.one', $item) }}" style="color:mediumseagreen">Details...</a>
                     @endif
                 </div>
                 <hr>
