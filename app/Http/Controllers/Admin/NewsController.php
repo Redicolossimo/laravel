@@ -35,17 +35,20 @@ class NewsController extends Controller
                 $path = Storage::putFile('public', $request->file('newsImg'));
                 $news->newsImg = Storage::url($path);;
             }
+
             $this->validate($request, News::rules(), [], News::attributeNames());
+
+
             $result = $news->fill($request->all())->save();
 
             if ($result) {
                 return redirect()
                     ->route('admin.news')
-                    ->with('success', 'Новость успешно изменена!');
+                    ->with('success', 'News successfully added');
             } else {
                 return redirect()
                     ->route('admin.addNews')
-                    ->with('error', 'Ошибка изменения новости!');
+                    ->with('error', 'News changing error!');
             }
         }
     }
@@ -56,7 +59,7 @@ class NewsController extends Controller
         $news->delete();
         return redirect()
             ->route('admin.news')
-            ->with('success', 'Новость успешно удалена!');
+            ->with('success', 'News successfully deleted!');
     }
 
     public function add(Request $request, News $news)
@@ -65,7 +68,7 @@ class NewsController extends Controller
             $request->flash();
 
             $url = null;
-            //$news = new News();
+            $news = new News();
 
             if ($request->file('newsImg')) {
 
@@ -78,11 +81,11 @@ class NewsController extends Controller
             if($result) {
                 return redirect()
                     ->route('admin.news')
-                    ->with('success', 'Новость успешно создана!');
+                    ->with('success', 'News successfully add');
             } else {
                 return redirect()
                     ->route('admin.addNews')
-                    ->with('error', 'При создании новости что то пошло не так!');
+                    ->with('error', 'Creation error!!!');
             }
         }
 

@@ -13,7 +13,7 @@
 
 Route::get('/login', 'UserController@index')->name('login');
 
-
+Route::match(['post','get'], '/profile', 'ProfileController@update')->name('updateProfile');
 
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/home', 'HomeController@home')->name('home');
@@ -21,8 +21,15 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::group([
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware' => ['auth', 'is_admin']
 ], function () {
+    Route::match(['post','get'], '/profile', 'ProfileController@update')->name('updateProfile');
+
+    Route::get('/users', 'UserController@index')->name('users');
+    Route::get('/deleteUser{user}', 'UserController@delete')->name('deleteUser');
+    Route::get('/updateUser{user}', 'UserController@update')->name('updateUser');
+
     Route::get('/news', 'NewsController@all')->name('news');
     Route::match(['post','get'],'/addNews', 'NewsController@add')->name('addNews');
     Route::get('/updateNews{news}', 'NewsController@update')->name('updateNews');
@@ -45,3 +52,7 @@ Route::group(
 }
 );
 
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');

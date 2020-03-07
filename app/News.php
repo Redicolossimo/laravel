@@ -22,7 +22,7 @@ class News extends Model
             'heading' => 'required|min:5|max:50',
             'description' => 'required|max:5000',
             'category_id' => "required|exists:{$newsCategory},id",
-            'newsImg' => 'mimes:jpeg,bmp,png,gif|max:1000'
+            'newsImg' => 'mimes:jpeg,bmp,png,gif|max:1000',
         ];
     }
 

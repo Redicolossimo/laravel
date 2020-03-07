@@ -19,7 +19,7 @@
                         </div>
                     @endif
                     <input name="heading" type="text" class="form-control" id="newsTitle" placeholder="News Title"
-                           value="{{ $news->heading ?? old('heading') }}">
+                           value="{{ old('heading') ?? $news->heading ?? ""}}">
                 </div>
 
                 <div class="form-group">
@@ -32,9 +32,11 @@
                         </div>
                     @endif
                     <select name="category_id" class="form-control" id="catSelect">
-                        @forelse($categories as $item)
-                            <option @if ($item->id == old('category')) selected
-                                    @endif value="{{ $item->id}}">{{ $item->category }}</option>
+                        @forelse($categories as $category)
+                            <option @if ($news->category_id == $category->id) selected
+                                    @endif value="{{ $category->id}}">
+                                {{ $category->category}}
+                            </option>
                         @empty
                             <h2 style="padding: 20px; margin-left: 50px">No category</h2>
                         @endforelse
@@ -51,7 +53,7 @@
                         </div>
                     @endif
                     <textarea name="description" class="form-control" rows="3"
-                              id="newsText">{{ $news->description ?? old('description') }}</textarea>
+                              id="newsText">{{ old('description') ?? $news->description ?? "" }}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -63,11 +65,11 @@
                             @endforeach
                         </div>
                     @endif
-                    <input name="newsImg" type="file" class="form-control-file" id="newsImage">
+                    <input name="newsImg" type="file" class="form-control-file " id="newsImage">
                 </div>
 
                 <div class="form-check">
-                    <input @if ($news->isPrivate == 1 || old('isPrivate') == 1) checked @endif name="isPrivate"
+                    <input @if (old('isPrivate') == 1 || $news->isPrivate == 1) checked @endif name="isPrivate"
                            class="form-check-input" type="checkbox" value="1" id="newsPrivate">
                     <label class="form-check-label" for="newsPrivate">
                         Is it for private sector?
