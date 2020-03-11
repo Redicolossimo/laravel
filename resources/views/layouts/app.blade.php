@@ -1,11 +1,12 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.6">
+
     <title>NSS.NewSSite @yield('title')</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/jumbotron/">
@@ -51,34 +52,35 @@
     <link href="jumbotron.css" rel="stylesheet">
 </head>
 <body>
+    <div id="app">
 
-    @include('menus.main')
-    @if (session('success'))
-    <div class="container" style="position: absolute; top: 50px;">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{session('success')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-    @endif
-    @if (session('error'))
-        <div class="container" style="position: absolute; top: 50px;">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{session('error')}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        @include('menus.main')
+        @if (session('success'))
+            <div class="container" style="position: absolute; top: 50px;">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{session('success')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
-        </div>
-    @endif
-<main role="main">
-    @yield('content')
-</main>
-
-<footer class="container" style="padding-bottom: 0; margin-bottom: 0;">
-    <p>&copy; Dannilsan.inc 2019-2020</p>
-</footer>
+        @endif
+        @if (session('error'))
+            <div class="container" style="position: absolute; top: 50px;">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{session('error')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+        <main role="main">
+            @yield('content')
+        </main>
+        <footer class="container" style="padding-bottom: 0; margin-bottom: 0;">
+            <p>&copy; Dannilsan.inc 2019-2020</p>
+        </footer>
+    </div>
 </body>
 </html>

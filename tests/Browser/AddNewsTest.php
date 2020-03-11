@@ -17,16 +17,16 @@ class AddNewsTest extends DuskTestCase
      *
      * @return void
      */
-    public function test1Example()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/addNews')
-                ->type('title', '123')
-                ->type('text', 'test')
-                ->press('Добавить')
-                ->assertPathIs('/admin/addNews');
-        });
-    }
+//    public function test1Example()
+//    {
+//        $this->browse(function (Browser $browser) {
+//            $browser->visit('/admin/addNews')
+//                ->type('title', '123')
+//                ->type('text', 'test')
+//                ->press('Добавить')
+//                ->assertPathIs('/admin/addNews');
+//        });
+//    }
         public function test2Example()
     {
         $this->browse(function (Browser $browser) {
@@ -65,13 +65,13 @@ class AddNewsTest extends DuskTestCase
                 ->assertDontSee('The Text of news field is required.');
         });
     }
-    public function testEditNews() {
-        $this->browse(function (Browser $browser) {
-            $news = News::query()->find(2);
-            $browser->visit('/admin/updateNews2')
-                ->assertInputValue('heading', $news->heading)
-                ->assertInputValue('description', $news->description)
-                ->assertSelected('category_id', $news->category_id);
-        });
-    }
+//    public function testEditNews() {
+//        $this->browse(function (Browser $browser) {
+//            $news = News::query()->find(2);
+//            $browser->visit('/admin/updateNews2')
+//                ->assertInputValue('heading', $news->heading)
+//                ->assertInputValue('description', $news->description)
+//                ->assertSelected('category_id', $news->category_id);
+//        });
+//    }
 }
