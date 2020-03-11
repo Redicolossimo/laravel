@@ -20,16 +20,10 @@
                     <a class="nav-link {{request()->routeIs('news.categories')?'active':''}}"
                        href="{{route('news.categories')}}">Categories</a>
                 </li>
-                @if(Auth::check())
-                    <li class="nav-item">
-                        <a class="nav-link  {{request()->routeIs('updateProfile')?'active':''}}"
-                           href="{{ route('updateProfile') }}">Profile</a>
-                    </li>
-                @endif
                 @if(Auth::check() && Auth::user()->is_admin)
                     <li class="nav-item">
                         <a class="nav-link  {{request()->routeIs('admin.news')?'active':''}}"
-                           href="{{route('admin.news')}}">Admin</a>
+                           href="{{route('admin.news.index')}}">Admin</a>
                     </li>
                 @endif
 
@@ -55,6 +49,9 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @if(Auth::check())
+                                <a class="dropdown-item  {{request()->routeIs('updateProfile')?'active':''}}" href="{{ route('updateProfile') }}">Profile</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -64,6 +61,7 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
+
                         </div>
                     </li>
                 @endguest

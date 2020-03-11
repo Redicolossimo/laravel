@@ -6,7 +6,7 @@
     <div class="jumbotron">
         <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
             <h2>Profile changes</h2>
-            <form method="POST" action="{{ route('admin.updateProfile') }}">
+            <form method="POST" action="{{ route('updateProfile') }}">
                 @csrf
                 <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>

@@ -24,17 +24,15 @@ Route::group([
     'as' => 'admin.',
     'middleware' => ['auth', 'is_admin']
 ], function () {
-    Route::match(['post','get'], '/profile', 'ProfileController@update')->name('updateProfile');
+    Route::get('/parser', 'ParserController@index')->name('parser');
+    Route::get('/parserNews', 'ParserController@getParsedNews')->name('parserNews');
 
     Route::get('/users', 'UserController@index')->name('users');
     Route::get('/deleteUser{user}', 'UserController@delete')->name('deleteUser');
-    Route::get('/updateUser{user}', 'UserController@update')->name('updateUser');
+    Route::get('/users/toggleAdmin/{user}', 'UserController@toggleAdmin')->name('toggleAdmin');
 
-    Route::get('/news', 'NewsController@all')->name('news');
-    Route::match(['post','get'],'/addNews', 'NewsController@add')->name('addNews');
-    Route::get('/updateNews{news}', 'NewsController@update')->name('updateNews');
-    Route::post('/saveNews{news}', 'NewsController@save')->name('saveNews');
-    Route::get('/deleteNews{news}', 'NewsController@delete')->name('deleteNews');
+    Route::resource('/news', 'NewsController')->except('show');
+
 
     Route::get('/test1', 'AdminController@test1')->name('test1');
     Route::get('/test2', 'AdminController@test2')->name('test2');

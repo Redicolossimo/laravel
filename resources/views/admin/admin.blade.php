@@ -27,12 +27,19 @@
                                     <img style="width: 100%" src="{{ $item->newsImg  ?? asset('http://placehold.it/150')}}"
                                          alt="news_img">
                                 </div>
-                                <div style="padding:20px 0 0 25px; color:mediumseagreen;">
+                                <div style="padding:20px 0 0 0; color:mediumseagreen; height:100px">
                                     <p>{{ $item->heading }}</p>
                                 </div>
                             </a>
-                            <a href="{{ route('admin.updateNews', $item) }}"><button type="button" class="btn btn-success">Edit</button></a>
-                            <a href="{{ route('admin.deleteNews', $item) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+
+                            <form action="{{ route('admin.news.destroy', $item) }}" method="post">
+                                <a href="{{ route('admin.news.edit', $item) }}" style="text-decoration: noneсщьзщыук">
+                                    <button type="button" class="btn btn-success">Edit</button>
+                                </a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </div>
                     @empty
                         <p>No News</p>

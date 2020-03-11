@@ -14,7 +14,8 @@ class NewsController extends Controller
     public function news(News $news)
     {
         $news = News::query()
-            ->where('isPrivate', false)
+            ->where('isPrivate', '==', false)
+            ->where('is_parsed', '==', false)
             ->paginate(6);
         return view('news.all', ['news' => $news]);
     }
@@ -37,6 +38,7 @@ class NewsController extends Controller
     {
         $news = News::query()
             ->where('category_id', $category->id)
+            ->where('is_parsed', '==', 'false')
             ->paginate(4);
         $categories = Category::all();
 

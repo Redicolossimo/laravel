@@ -10,89 +10,71 @@ use Storage, DB;
 
 class NewsController extends Controller
 {
-    public function all()
+    public function index()
     {
-        $news = News::query()
-            ->paginate(6);
-
+        $news = News::query()->where('is_parsed', false)->paginate(6);
         return view('admin.admin', ['news' => $news]);
+    }
 
+    public function edit(News $news)
+    {
+        return view('admin.addNews', [
+            'news' => $news,
+            'categories' => Category::all()
+        ]);
     }
 
     public function update(Request $request, News $news)
     {
-
-        return view('admin.addNews', [
-            'news' => $news,
-            'categories' => Category::all()
-        ]);
+        $result = $this->saveData($request, $news);
+        return $this->makeMessage('News successfully changed', 'News changing error!', $result);
     }
 
-    public function save(Request $request, News $news)
+    public function destroy(News $news)
     {
-        if ($request->isMethod('post')) {
-            if ($request->file('newsImg')) {
-                $path = Storage::putFile('public', $request->file('newsImg'));
-                $news->newsImg = Storage::url($path);;
-            }
-
-            $this->validate($request, News::rules(), [], News::attributeNames());
-
-
-            $result = $news->fill($request->all())->save();
-
-            if ($result) {
-                return redirect()
-                    ->route('admin.news')
-                    ->with('success', 'News successfully added');
-            } else {
-                return redirect()
-                    ->route('admin.addNews')
-                    ->with('error', 'News changing error!');
-            }
-        }
-    }
-
-    public function delete(News $news)
-    {
-
         $news->delete();
         return redirect()
-            ->route('admin.news')
+            ->route('admin.news.index')
             ->with('success', 'News successfully deleted!');
     }
 
-    public function add(Request $request, News $news)
+    public function store(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $request->flash();
+        $result = $this->saveData($request, new News());
+        return $this->makeMessage('News successfully added', 'Creation error!!!', $result);
+    }
 
-            $url = null;
-            $news = new News();
-
-            if ($request->file('newsImg')) {
-
-                $path = $request->file('newsImg')
-                    ->store('public');
-                $news->newsImg = Storage::url($path);
-            }
-            $this->validate($request, News::rules(), [], News::attributeNames());
-            $result = $news->fill($request->all())->save();
-            if($result) {
-                return redirect()
-                    ->route('admin.news')
-                    ->with('success', 'News successfully add');
-            } else {
-                return redirect()
-                    ->route('admin.addNews')
-                    ->with('error', 'Creation error!!!');
-            }
-        }
-
+    public function create(News $news)
+    {
         return view('admin.addNews', [
             'news' => $news,
             'categories' => Category::all()
         ]);
+    }
+
+    private function saveData(Request $request, News $news)
+    {
+        if ($request->file('newsImg')) {
+            $path = $request->file('newsImg')
+                ->store('public');
+            $news->newsImg = Storage::url($path);
+        }
+        $this->validate($request, News::rules(), [], News::attributeNames());
+        $news->fill($request->all())->save();
+        return $news;
+    }
+
+    private function makeMessage($msg, $errMsg, $result)
+    {
+        if ($result) {
+            return redirect()
+                ->route('admin.news.index')
+                ->with('success', $msg);
+        } else {
+            return redirect()
+                ->route('admin.news.create')
+                ->with('error', $errMsg);
+        }
     }
 
 }
