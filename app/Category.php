@@ -17,5 +17,15 @@ class Category extends Model
     public function news() {
         return $this->hasMany(News::class, 'category_id')->get();
     }
-
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 }
+
+

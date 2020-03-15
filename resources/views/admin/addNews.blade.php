@@ -6,9 +6,10 @@
     <div class="jumbotron">
         <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
             <form enctype="multipart/form-data"
-                  action="@if (!$news->id){{ route('admin.addNews') }} @else {{ route('admin.saveNews', $news) }}@endif"
+                  action="@if (!$news->id){{ route('admin.news.store') }} @else {{ route('admin.news.update', $news) }}@endif"
                   method="post">
                 @csrf
+                @if ($news->id) @method('PATCH') @endif
                 <div class="form-group">
                     <label for="newsTitle">Heading</label>
                     @if ($errors->has('heading'))
@@ -33,7 +34,7 @@
                     @endif
                     <select name="category_id" class="form-control" id="catSelect">
                         @forelse($categories as $category)
-                            <option @if ($news->category_id == $category->id) selected
+                            <option @if ( $category->id == old('category_id') ?? $news->category_id ) selected
                                     @endif value="{{ $category->id}}">
                                 {{ $category->category}}
                             </option>
