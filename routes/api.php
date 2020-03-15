@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+
+Route::get('altDelete', function (Request $request) {
+    return response()->json(['status'=>'ok', 'id'=>$request->id]);
+})->middleware('api');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

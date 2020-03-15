@@ -23,6 +23,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/ckeditor4/ckeditor.js') }}"
+            type="text/javascript" charset="utf-8" ></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

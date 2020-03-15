@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\DomCrawler\Crawler;
 
 class News extends Model
 {

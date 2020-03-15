@@ -11,12 +11,23 @@
 |
 */
 
-Route::get('/login', 'UserController@index')->name('login');
-
-Route::match(['post','get'], '/profile', 'ProfileController@update')->name('updateProfile');
+//Route::get('/login', 'UserController@index')->name('login');
 
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/home', 'HomeController@home')->name('home');
+
+Route::match(['post','get'], '/profile', 'ProfileController@update')->name('updateProfile');
+
+Route::get('/auth/{provider}', 'LoginController@loginProvider')->name('providerLogin');
+Route::get('/auth/{provider}/response', 'LoginController@responseProvider')->name('providerResponse');
+
+//Route::get('/auth/vkontakte', 'LoginController@loginVK')->name('vkLogin');
+//Route::get('/auth/vkontakte/response', 'LoginController@responseVK')->name('vkResponse');
+//
+//Route::get('/auth/facebook', 'LoginController@loginFB')->name('fbLogin');
+//Route::get('/auth/facebook/response', 'LoginController@responseFB')->name('fbResponse');
+
+
 
 Route::group([
     'prefix' => 'admin',
@@ -52,5 +63,3 @@ Route::group(
 
 
 Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
