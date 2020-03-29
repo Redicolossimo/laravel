@@ -24,22 +24,26 @@
                             <a style="text-decoration: #2fa360; text-underline-color:mediumseagreen"
                                href="{{ route('news.one', $item) }}">
                                 <div style="width: 150px; height: 150px; ">
-                                    <img style="width: 100%" src="{{ $item->newsImg  ?? asset('http://placehold.it/150')}}"
+                                    <img style="width: 100%"
+                                         src="{{ $item->newsImg  ?? asset('http://placehold.it/150')}}"
                                          alt="news_img">
                                 </div>
                                 <div style="padding:20px 0 0 0; color:mediumseagreen; height:100px">
                                     <p>{{ $item->heading }}</p>
                                 </div>
                             </a>
-
-                            <form action="{{ route('admin.news.destroy', $item) }}" method="post">
-                                <a href="{{ route('admin.news.edit', $item) }}" style="text-decoration: noneсщьзщыук">
-                                    <button type="button" class="btn btn-success">Edit</button>
+                            <div style="display: flex; width: 50%; justify-content: space-evenly">
+                                <a href="{{ route('admin.news.edit', $item) }}">
+                                    <button type="button" class="btn btn-success" style="text-decoration: none"> Edit
+                                    </button>
                                 </a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                                <form action="{{ route('admin.news.destroy', $item) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+{{--                                <button class="btn btn-danger">AltDelete</button>--}}
+                            </div>
                         </div>
                     @empty
                         <p>No News</p>

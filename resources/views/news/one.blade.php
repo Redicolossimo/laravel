@@ -18,7 +18,7 @@
                         <img src="{{ $news->newsImg == '' ? asset('http://placehold.it/1000x300') : $news->newsImg}}" alt="news_img" style="padding-top: 40px; width: 100%">
                     </div>
                     <p style="width:100%; padding-top: 40px">
-                        <hr> {{ $news->description }} <hr>
+                        <hr> {!! $news->description !!} <hr>
                     </p>
                 </div>
             </div>

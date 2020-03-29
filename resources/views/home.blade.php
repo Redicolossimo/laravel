@@ -14,7 +14,7 @@
             @endif
 
             You are logged in!
-            <p><span style="color:green">This is some information about this project.</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus architecto, dignissimos ea fugit harum inventore necessitatibus quam ut velit. </p>
+            <p><span style="color:mediumseagreen">This is some information about this project.</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus architecto, dignissimos ea fugit harum inventore necessitatibus quam ut velit. </p>
             <div style="height:400px">
                 <img style="width:100%" src="{{ asset('img/welcome.png') }}" alt="pic">
             </div>

@@ -139,8 +139,10 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        \Orchestra\Parser\XmlServiceProvider::class,
+//        \Laravel\Socialite\Two\User::class,
         Illuminate\Auth\AuthServiceProvider::class,
+        Orchestra\Parser\XmlServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,

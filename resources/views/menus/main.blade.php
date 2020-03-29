@@ -42,6 +42,9 @@
                         </li>
                     @endif
                 @else
+                    <li class="nav-item float-right">
+                        <img src="{{Auth()->user()->avatar}}" alt="avatar" style="width: 50px; height: 50px">
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -56,6 +56,9 @@
                         </li>
                     @endif
                 @else
+                    <li class="nav-item float-right">
+                        <img src="{{Auth()->user()->avatar}}" alt="avatar">
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -64,7 +67,8 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @if(Auth::check())
-                                <a class="dropdown-item  {{request()->routeIs('updateProfile')?'active':''}}" href="{{ route('updateProfile') }}">Profile</a>
+                                <a class="dropdown-item  {{request()->routeIs('updateProfile')?'active':''}}"
+                                   href="{{ route('updateProfile') }}">Profile</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
