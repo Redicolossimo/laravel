@@ -12,7 +12,7 @@
     @if (!$news->isPrivate)
         <section class="news-body">
             <div class="jumbotron">
-                <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
+                <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh; padding-top: 50px;">
                     <h1>{{ $news->heading }}</h1>
                     <div>
                         <img src="{{ $news->newsImg == '' ? asset('http://placehold.it/1000x300') : $news->newsImg}}" alt="news_img" style="padding-top: 40px; width: 100%">

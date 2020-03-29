@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="jumbotron">
-        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
+        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh; padding-top: 50px;">
             <!-- Example row of columns -->
             @if(isset($category))
                 <h1>{{ $category }}</h1>
@@ -22,7 +22,7 @@
                                 <img style="width: 100%" src="{{ $item->newsImg  ?? asset('http://placehold.it/150')}}"
                                      alt="news_img">
                             </div>
-                            <div style="padding:20px 0 0 25px; color:mediumseagreen;">
+                            <div style="padding:20px 0 0 0; color:mediumseagreen;">
                                 <p>{{ $item->heading }}</p>
                             </div>
                         </a>

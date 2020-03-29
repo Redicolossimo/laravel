@@ -15,21 +15,32 @@ class UserController extends Controller
         return view('admin.users', ['users' => $users]);
     }
 
-    public function delete(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-        return redirect()
-            ->route('admin.users')
-            ->with('success', 'User successfully deleted!');
+        User::destroy($id);
+        return response()->json([
+            'id' => $id,
+            'message' => 'User successfully deleted!',
+        ]);
+//        $user->delete();
+//        return redirect()
+//            ->route('admin.users')
+//            ->with('success', 'User successfully deleted!');
     }
 
-    public function toggleAdmin(User $user)
+    public function update($id)
     {
+        $user = User::query()->find($id);
         $user->is_admin = !$user->is_admin;
         $user->save();
-        return redirect()
-            ->route('admin.users')
-            ->with('success', 'User mode successfully changed to/from admin!');
+        return response()->json([
+            'id' => $id,
+            'message' => 'User successfully updated!',
+            'is_admin' => $user->is_admin,
+        ]);
+//        return redirect()
+//            ->route('admin.users')
+//            ->with('success', 'User mode successfully changed to/from admin!');
     }
 
 }

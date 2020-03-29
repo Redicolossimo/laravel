@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="jumbotron">
-        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
+        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh; padding-top: 50px;">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
@@ -51,18 +51,18 @@
                                 <div class="form-group row" style="display: flex">
                                     <label for="password"
                                            class="col-md-4 col-form-label text-md-right">{{ __('Login by social') }}</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" style="display: flex;">
                                         <a href="{{ route('providerLogin', 'vkontakte') }}">
-{{--                                        <a href="{{ route('vkLogin') }}">--}}
+                                            {{--                                        <a href="{{ route('vkLogin') }}">--}}
                                             <i class="fab fa-vk fa-3x"></i>
                                         </a>
                                         <a href="{{ route('providerLogin', 'facebook') }}">
-{{--                                        <a href="{{ route('providerLogin', 'vkontakte') }}">--}}
+                                            {{--                                        <a href="{{ route('providerLogin', 'vkontakte') }}">--}}
                                             <i class="fab fa-facebook-square fa-3x"></i>
                                         </a>
-{{--                                        <a href="#" style="font-size: 0.9em">--}}
-{{--                                            <i class="fab fa-google fa-3x" ></i>--}}
-{{--                                        </a>--}}
+                                        {{--                                        <a href="#" style="font-size: 0.9em">--}}
+                                        {{--                                            <i class="fab fa-google fa-3x" ></i>--}}
+                                        {{--                                        </a>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">

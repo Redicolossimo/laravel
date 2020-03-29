@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\News;
-use Illuminate\Http\Request;
+use \Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Storage, DB;
 
@@ -12,7 +12,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::query()->where('is_parsed', false)->paginate(6);
+        $news = News::query()->paginate(8);
         return view('admin.admin', ['news' => $news]);
     }
 
@@ -30,12 +30,17 @@ class NewsController extends Controller
         return $this->makeMessage('News successfully changed', 'News changing error!', $result);
     }
 
-    public function destroy(News $news)
+    public function destroy($id)
     {
-        $news->delete();
-        return redirect()
-            ->route('admin.news.index')
-            ->with('success', 'News successfully deleted!');
+        News::destroy($id);
+        return response()->json([
+            'id' => $id,
+            'message' => 'News successfully deleted!',
+        ]);
+//        return redirect()
+//            ->route('admin.news.index')
+//            ->with('success', 'News successfully deleted!');
+
     }
 
     public function store(Request $request)

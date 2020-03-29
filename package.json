@@ -27,6 +27,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.12.1",
         "ckeditor4": "^4.14.0",
-        "font-awesome": "^4.7.0"
+        "font-awesome": "^4.7.0",
+        "particles.js": "^2.0.0"
     }
 }

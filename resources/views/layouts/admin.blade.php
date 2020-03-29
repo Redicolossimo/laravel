@@ -22,7 +22,9 @@
     <meta name="theme-color" content="#563d7c">
 
     <!-- Scripts -->
+    <script src="{{ asset('js/libs/particles.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,7 +32,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -52,37 +53,85 @@
     <link href="jumbotron.css" rel="stylesheet">
 </head>
 <body>
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: grey"></div>
+    <div id="page-wrapper" style="position: relative; z-index: 2; width: 70%; margin: -47px auto -32px;">
 
-    @include('menus.admin')
-    @if (session('success'))
-    <div class="container" style="position: absolute; top: 50px;">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{session('success')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-    @endif
-    @if (session('error'))
-        <div class="container" style="position: absolute; top: 50px;">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{session('error')}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        @include('menus.admin')
+        <div id="alert" style="position: relative; bottom:-65px; width:100%"></div>
+        @if (session('success'))
+
+            <div class="container" style="position: relative; top: 65px;">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{session('success')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
+        @endif
+        @if (session('error'))
+            <div class="container" style="position: absolute; top: 65px;">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{session('error')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @endif
+        <main role="main">
+
+            @yield('content')
+
+
+        </main>
+    </div>
+    <!-- Footer -->
+    <footer class="page-footer font-small special-color-dark pt-4" style="position: relative; z-index: 1; background-color: dimgrey;">
+
+        <!-- Footer Elements -->
+        <div class="container">
+
+            <!-- Social buttons -->
+            <ul class="list-unstyled list-inline text-center">
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-fb mx-1">
+                        <i class="fab fa-facebook-f"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-tw mx-1">
+                        <i class="fab fa-twitter"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-gplus mx-1">
+                        <i class="fab fa-google-plus-g"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-li mx-1">
+                        <i class="fab fa-linkedin-in"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-dribbble mx-1">
+                        <i class="fab fa-dribbble"> </i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Social buttons -->
+
         </div>
-    @endif
-<main role="main">
+        <!-- Footer Elements -->
 
-    @yield('content')
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <span> Dannilsan.inc</span>
+        </div>
+        <!-- Copyright -->
 
-
-</main>
-
-<footer class="container" style="padding-bottom: 0; margin-bottom: 0;">
-    <p>&copy; Dannilsan.inc 2019-2020</p>
-</footer>
+    </footer>
+    <!-- Footer -->
 </body>
 </html>

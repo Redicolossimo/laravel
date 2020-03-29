@@ -6,6 +6,10 @@
 
 require('./bootstrap');
 
+require('./custom/user');
+require('./custom/news');
+require('./custom/particles');
+
 //window.Vue = require('vue');
 
 /**

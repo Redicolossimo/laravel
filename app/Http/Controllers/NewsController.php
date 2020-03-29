@@ -14,16 +14,13 @@ class NewsController extends Controller
     public function news(News $news)
     {
         $news = News::query()
-            ->where('isPrivate',  false)
-            ->where('is_parsed', false)
-            ->paginate(6);
+            ->paginate(8);
         return view('news.all', ['news' => $news]);
     }
 
     public function categories()
     {
         return view('news.category', [
-//                'categories' => Category::query()->select(['id', 'category', 'name'])->get()
                 'categories' => Category::all()
             ]
         );

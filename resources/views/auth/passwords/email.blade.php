@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="jumbotron">
-        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
+        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh; padding-top: 50px;">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
