@@ -17,7 +17,6 @@ class CreateResourcesTable extends Migration
             $table->integer('id', true);
             $table->string('link', 255);
         });
-        (new ResourcesSeeder())->run();
     }
 
     /**

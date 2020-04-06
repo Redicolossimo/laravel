@@ -4,7 +4,7 @@
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
+        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh; padding-top: 50px;">
             <h2>Profile changes</h2>
             <form method="POST" action="{{ route('updateProfile') }}">
                 @csrf
@@ -58,7 +58,7 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success">
                             {{ __('Change Profile') }}
                         </button>
                     </div>

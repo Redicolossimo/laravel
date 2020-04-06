@@ -3,7 +3,7 @@
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <div class="container" style="min-height: 80vh; margin-bottom: -3vh;">
+        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top:3vh; padding-top: 50px;">
 
 
             <h1 class="display-3">This is information/home page</h1>

@@ -8,22 +8,42 @@ use App\Category;
 use App\News;
 use DB;
 use Orchestra\Parser\Xml\Facade as XMLParser;
-use Symfony\Component\DomCrawler\Crawler;
+//use Symfony\Component\DomCrawler\Crawler;
 
 class XMLParserService
 {
     public function saveParsedNews($link)
     {
-        //dump($link);
+        //dd($link);
         $xml = XMLParser::load($link);
 
         $data = $xml->parse([
             'category' => ['uses' => 'channel.title'],
             'news' => ['uses' => 'channel.item[title,link,description]']
         ]);
+        //dd($data);
         $this->news($data);
     }
     private function news($data) {
+        //dd($data);
+        $newCategory = $data['category'];
+
+        $category = Category::firstOrCreate([
+            'category' => $newCategory,
+            'name' => \Str::slug($newCategory),
+        ]);
+
+//        $category = Category::query()
+//            ->where('category', $newCategory)
+//            ->first();
+//
+//        if (!$category) {
+//            $category = new Category([
+//                'category' => $newCategory,
+//                'name' => \Str::slug($newCategory),
+//            ]);
+//            $category->save();
+//        }
         $news = [];
         foreach ($data['news'] as $item){
             // Тут рабочий грабер картинок к новостя, но в ленте яндекса у каждой новости своя версткаб выдернутая из
@@ -40,20 +60,6 @@ class XMLParserService
 //            $videoPreview = $crawler->filter('a > .news-media-stack__photo')->each(function (Crawler $node, $i) {
 //                return $node->image()->getUri();
 //            });
-
-            $newCategory = $data['category'];
-
-            $category = Category::query()
-                ->where('category', $newCategory)
-                ->first();
-
-            if (!$category) {
-                $category = new Category([
-                    'category' => $newCategory,
-                    'name' => \Str::slug($newCategory),
-                ]);
-                $category->save();
-            }
             $newsBuffer = News::query()
                 ->where('heading', $item['title'])
                 ->first();
@@ -67,6 +73,7 @@ class XMLParserService
                 ];
             }
         }
+        //dd($news);
         News::query()->insert($news);
     }
 }

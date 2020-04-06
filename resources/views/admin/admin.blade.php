@@ -5,22 +5,18 @@
 @endsection
 
 @section('content')
+
     <div class="jumbotron">
-        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
-            <h1
-                style="padding: 20px"
-            >
-                Welcome to Admin-page!</h1>
+
+        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh; padding-top: 50px;">
+
+            <h1>
+                Welcome to Admin-page! Here U can rule the news!</h1>
             <div>
-                <!-- Example row of columns -->
-                @if(isset($category))
-                    <h1>{{ $category }}</h1>
-                @else
-                    <h1>News</h1>
-                @endif
                 <div class="row">
                     @forelse($news as $item)
-                        <div class="news-block col-sm-12 col-md-6 col-lg-4 col-xl-3" style="padding-top: 20px">
+                        <div id="news{{ $item->id }}" class="news-block col-sm-12 col-md-6 col-lg-4 col-xl-3"
+                             style="padding-top: 20px">
                             <a style="text-decoration: #2fa360; text-underline-color:mediumseagreen"
                                href="{{ route('news.one', $item) }}">
                                 <div style="width: 150px; height: 150px; ">
@@ -32,17 +28,17 @@
                                     <p>{{ $item->heading }}</p>
                                 </div>
                             </a>
-                            <div style="display: flex; width: 50%; justify-content: space-evenly">
+                            <div style="display: flex; width: 60%; justify-content: space-evenly">
                                 <a href="{{ route('admin.news.edit', $item) }}">
                                     <button type="button" class="btn btn-success" style="text-decoration: none"> Edit
                                     </button>
                                 </a>
-                                <form action="{{ route('admin.news.destroy', $item) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-{{--                                <button class="btn btn-danger">AltDelete</button>--}}
+{{--                                <form action="{{ route('admin.news.destroy', $item) }}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    @method('DELETE')--}}
+{{--                                    <button type="submit" class="btn btn-danger">Delete</button>--}}
+{{--                                </form>--}}
+                                <button class="btn btn-danger altDelete" data-id="{{ $item->id }}">Delete</button>
                             </div>
                         </div>
                     @empty
@@ -54,7 +50,41 @@
                 </div>
             </div>
         </div>
-
     </div>
+{{--    <script>--}}
+{{--        let buttons = document.querySelectorAll('.altDelete');--}}
+{{--        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');--}}
+{{--        buttons.forEach((elem) => {--}}
+{{--            elem.addEventListener('click', () => {--}}
+{{--                console.log('sending....');--}}
+{{--                let id = elem.getAttribute('data-id');--}}
+{{--                (async () => {--}}
+{{--                    const response = await fetch(`/api/news/${id}`, {--}}
+{{--                        headers: {--}}
+{{--                            'X-CSRF-TOKEN': token,--}}
+{{--                            'Content-type': 'application/json'--}}
+{{--                        },--}}
+{{--                        method: 'delete',--}}
+{{--                        body: JSON.stringify({--}}
+{{--                            id--}}
+{{--                        })--}}
+{{--                    });--}}
+{{--                    const answer = await response.json();--}}
+{{--                    document.getElementById(`news${answer.id}`).remove();--}}
+{{--                    document.getElementById(`alert`).innerHTML = `--}}
+{{--                    <div class="container">--}}
+{{--                        <div class="alert alert-success alert-dismissible fade show" role="alert">--}}
+{{--                            ${answer.message}--}}
+{{--                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                                <span aria-hidden="true">&times;</span>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    `;--}}
+{{--                    console.log(answer);--}}
+{{--                })();--}}
+{{--            })--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection
 

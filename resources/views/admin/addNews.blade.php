@@ -4,7 +4,7 @@
 @section('content')
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh">
+        <div class="container" style="min-height: 80vh; margin-bottom: -3vh; margin-top: 3vh; padding-top: 50px;">
             <form enctype="multipart/form-data"
                   action="@if (!$news->id){{ route('admin.news.store') }} @else {{ route('admin.news.update', $news) }}@endif"
                   method="post">
